@@ -41,7 +41,6 @@ library
     , free < 5.2
     , unsafe < 0.1
     , microlens <0.5
-    , microlens-th <0.5
     , multistate >=0.7 && <0.9
     , pretty <1.2
     , containers <0.7
@@ -76,7 +75,6 @@ library
     StandaloneDeriving
     DataKinds
     TypeOperators
-    TemplateHaskell
   }
   ghc-options: {
     -Wall
@@ -97,7 +95,6 @@ test-suite tests
     , free
     , unsafe
     , microlens
-    , microlens-th
     , multistate
     , pretty
     , containers

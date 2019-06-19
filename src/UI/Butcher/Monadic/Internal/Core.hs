@@ -4,7 +4,6 @@
 {-# LANGUAGE StandaloneDeriving #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE TemplateHaskell #-}
 module UI.Butcher.Monadic.Internal.Core
   ( addCmdSynopsis
   , addCmdHelp

@@ -3,7 +3,6 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE StandaloneDeriving #-}
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE TemplateHaskell #-}
 
 module UI.Butcher.Monadic.Internal.Types
   ( CommandDesc (..)
@@ -33,10 +32,8 @@ where
 import           Control.Monad.Free
 import qualified Control.Monad.Trans.MultiState.Strict as MultiStateS
 
-import qualified Lens.Micro.TH as LensTH
-
 import qualified Text.PrettyPrint as PP
-
+import Lens.Micro.Type
 
 
 -- | Butcher supports two input modi: @String@ and @[String]@. Program
@@ -200,8 +197,85 @@ instance Show (CommandDesc out) where
 
 --
 
-LensTH.makeLenses ''CommandDesc
-LensTH.makeLenses ''PartDesc
+cmd_children :: Lens' (CommandDesc out_afqP) (Deque (Maybe String,
+                                                           CommandDesc out_afqP))
+cmd_children
+      f_ahUm
+      (CommandDesc x_ahUn x_ahUo x_ahUp x_ahUq x_ahUr x_ahUs x_ahUt)
+      = (fmap
+           (\ y_ahUu
+              -> ((((((CommandDesc x_ahUn) x_ahUo) x_ahUp) x_ahUq) x_ahUr)
+                    y_ahUu)
+                   x_ahUt))
+          (f_ahUm x_ahUs)
+{-# INLINE cmd_children #-}
+cmd_help :: Lens' (CommandDesc out_afqP) (Maybe PP.Doc)
+cmd_help
+      f_ahUv
+      (CommandDesc x_ahUw x_ahUx x_ahUy x_ahUz x_ahUA x_ahUB x_ahUC)
+      = (fmap
+           (\ y_ahUD
+              -> ((((((CommandDesc x_ahUw) x_ahUx) y_ahUD) x_ahUz) x_ahUA)
+                    x_ahUB)
+                   x_ahUC))
+          (f_ahUv x_ahUy)
+{-# INLINE cmd_help #-}
+cmd_mParent :: Lens' (CommandDesc out_afqP) (Maybe (Maybe String,
+                                                           CommandDesc out_afqP))
+cmd_mParent
+      f_ahUE
+      (CommandDesc x_ahUF x_ahUG x_ahUH x_ahUI x_ahUJ x_ahUK x_ahUL)
+      = (fmap
+           (\ y_ahUM
+              -> ((((((CommandDesc y_ahUM) x_ahUG) x_ahUH) x_ahUI) x_ahUJ)
+                    x_ahUK)
+                   x_ahUL))
+          (f_ahUE x_ahUF)
+{-# INLINE cmd_mParent #-}
+cmd_out :: Lens' (CommandDesc out_afqP) (Maybe out_afqP)
+cmd_out
+      f_ahUN
+      (CommandDesc x_ahUO x_ahUP x_ahUQ x_ahUR x_ahUS x_ahUT x_ahUU)
+      = (fmap
+           (\ y_ahUV
+              -> ((((((CommandDesc x_ahUO) x_ahUP) x_ahUQ) x_ahUR) y_ahUV)
+                    x_ahUT)
+                   x_ahUU))
+          (f_ahUN x_ahUS)
+{-# INLINE cmd_out #-}
+cmd_parts :: Lens' (CommandDesc out_afqP) [PartDesc]
+cmd_parts
+      f_ahUW
+      (CommandDesc x_ahUX x_ahUY x_ahUZ x_ahV0 x_ahV1 x_ahV2 x_ahV3)
+      = (fmap
+           (\ y_ahV4
+              -> ((((((CommandDesc x_ahUX) x_ahUY) x_ahUZ) y_ahV4) x_ahV1)
+                    x_ahV2)
+                   x_ahV3))
+          (f_ahUW x_ahV0)
+{-# INLINE cmd_parts #-}
+cmd_synopsis :: Lens' (CommandDesc out_afqP) (Maybe PP.Doc)
+cmd_synopsis
+      f_ahV5
+      (CommandDesc x_ahV6 x_ahV7 x_ahV8 x_ahV9 x_ahVa x_ahVb x_ahVc)
+      = (fmap
+           (\ y_ahVd
+              -> ((((((CommandDesc x_ahV6) y_ahVd) x_ahV8) x_ahV9) x_ahVa)
+                    x_ahVb)
+                   x_ahVc))
+          (f_ahV5 x_ahV7)
+{-# INLINE cmd_synopsis #-}
+cmd_visibility :: Lens' (CommandDesc out_afqP) Visibility
+cmd_visibility
+      f_ahVe
+      (CommandDesc x_ahVf x_ahVg x_ahVh x_ahVi x_ahVj x_ahVk x_ahVl)
+      = (fmap
+           (\ y_ahVm
+              -> ((((((CommandDesc x_ahVf) x_ahVg) x_ahVh) x_ahVi) x_ahVj)
+                    x_ahVk)
+                   y_ahVm))
+          (f_ahVe x_ahVl)
+{-# INLINE cmd_visibility #-}
 
 --
 
